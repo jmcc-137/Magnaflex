@@ -10,7 +10,7 @@ const Inicio = () => {
       <div className="absolute inset-0 w-full h-full bg-white/0">
         {/* Video de fondo */}
         <video
-          src="./public/fondo.mp4"
+          src="/fondo.mp4"
           autoPlay
           loop
           muted

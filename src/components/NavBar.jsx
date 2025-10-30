@@ -45,9 +45,9 @@ const NavBar = () => {
               <div className="flex items-center gap-1">
                 <div className="w-32 h-10 rounded flex items-center justify-center">
                     {navOpacity >= 1 ? (
-                      <img src="./public/logo2.png" alt="Logo Alternativo" className="h-40" />
+                      <img src="/logo2.png" alt="Logo Alternativo" className="h-40" />
                     ) : (
-                      <img src="./public/logo.png" alt="Logo" className="h-40" />
+                      <img src="/logo.png" alt="Logo" className="h-40" />
                     )}
                 </div>
                 <span className={`font-bold text-2xl tracking-wide -ml-3 ${navOpacity < 0.5 ? 'text-white' : 'text-black'}`}>MAGNAFLEX</span>
