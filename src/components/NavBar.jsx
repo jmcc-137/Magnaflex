@@ -31,10 +31,10 @@ const NavBar = () => {
   return (
     <>
       <nav
-        className="w-full fixed top-0 left-0 z-50 transition-colors duration-500"
+        className="w-full fixed top-0 left-0 z-50 transition-colors duration-500 shadow-lg"
         style={{
           background: `rgba(255,255,255,${navOpacity})`,
-          boxShadow: navOpacity > 0.1 ? '0 2px 16px 0 rgba(0,0,0,0.07)' : 'none',
+          boxShadow: navOpacity > 0.1 ? '0 2px 16px 0 rgba(0,0,0,0.07)' : '0 4px 24px 0 rgba(0,0,0,0.12)',
           backdropFilter: navOpacity > 0.1 ? 'blur(2px)' : 'none',
         }}
       >
