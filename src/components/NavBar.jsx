@@ -8,33 +8,25 @@ import { NavLink } from 'react-router-dom';
 import { CiSearch } from 'react-icons/ci';
 import { PiShoppingCartThin } from 'react-icons/pi';
 import { MdMenu } from 'react-icons/md';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import ResponsiveMenu from './ResponsiveMenu.jsx';
-
 import { MdClose } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
+import { COLORS, SHADOWS } from '../constants/theme';
+import { useScrollOpacity } from '../hooks';
+import { navLinkPropType } from '../validators/propValidators';
 const NavBar = () => {
   const [open, setOpen] = useState(false);
-  const [navOpacity, setNavOpacity] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Calcula la opacidad según el scroll, hasta 1 en 120px
-      const scrollY = window.scrollY;
-      const opacity = Math.min(scrollY / 120, 1);
-      setNavOpacity(opacity);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const navOpacity = useScrollOpacity(120);
 
   return (
     <>
       <nav
-        className="w-full fixed top-0 left-0 z-50 transition-colors duration-500 shadow-lg"
+        className="w-full fixed top-0 left-0 z-50 transition-colors duration-500"
         style={{
           background: `rgba(255,255,255,${navOpacity})`,
-          boxShadow: navOpacity > 0.1 ? '0 2px 16px 0 rgba(0,0,0,0.07)' : '0 4px 24px 0 rgba(0,0,0,0.12)',
+          boxShadow: navOpacity > 0.1 ? SHADOWS.navbar : SHADOWS.sm,
           backdropFilter: navOpacity > 0.1 ? 'blur(2px)' : 'none',
         }}
       >
@@ -68,15 +60,15 @@ const NavBar = () => {
                     <>
                       {/* Línea superior */}
                       <span
-                        className={`absolute left-0 right-0 top-0 h-[3px] rounded bg-[#D32F2F] transition-all duration-300 ${isActive ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`}
-                        style={{ transformOrigin: 'left' }}
+                        className={`absolute left-0 right-0 top-0 h-[3px] rounded transition-all duration-300 ${isActive ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`}
+                        style={{ transformOrigin: 'left', background: COLORS.primary }}
                       />
                       {/* Texto */}
                       {item.title}
                       {/* Línea inferior */}
                       <span
-                        className={`absolute left-0 right-0 bottom-0 h-[3px] rounded bg-[#D32F2F] transition-all duration-300 ${isActive ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`}
-                        style={{ transformOrigin: 'left' }}
+                        className={`absolute left-0 right-0 bottom-0 h-[3px] rounded transition-all duration-300 ${isActive ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`}
+                        style={{ transformOrigin: 'left', background: COLORS.primary }}
                       />
                     </>
                   )}
@@ -101,14 +93,27 @@ const NavBar = () => {
           </div>
 
           {/* Menú móvil hamburguesa */}
-          <div className="lg:hidden ml-30 flex items-center justify-end w-full" onClick={() => setOpen(!open)}>
-            <MdMenu className="text-4xl" />
+          <div className="lg:hidden ml-30 flex items-center justify-end w-full z-50 relative">
+            {!open ? (
+              <div onClick={() => setOpen(!open)} className="cursor-pointer">
+                <MdMenu className={`text-4xl transition-colors duration-200 ${navOpacity < 0.5 ? 'text-white' : 'text-black'}`} />
+              </div>
+            ) : null}
           </div>
         </div>
       </nav>
       {/* Mobile Sidebar section */}
-      <ResponsiveMenu open={open} navbarLinks={navbarLinks} setOpen={setOpen} />
+      <ResponsiveMenu open={open} navbarLinks={navbarLinks} setOpen={setOpen} navOpacity={navOpacity} />
     </>
   );
 };
+
+NavBar.propTypes = {
+  // El componente no acepta props
+};
+
+NavBar.defaultProps = {
+  // Sin props por defecto
+};
+
 export default NavBar;
