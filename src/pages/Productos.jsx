@@ -26,7 +26,7 @@ const Productos = () => {
     { id: 'automovil', label: '5. Manguera de goma para automóvil', icon: FaCar },
     { id: 'silicona', label: '6. Manguera de silicona', icon: FaSquare },
     { id: 'pvc', label: '7. Manguera de PVC', icon: FaBox },
-    { id: 'vacio', label: '8. CONDUCTOS Y MANGUERAS DE VACÍO', icon: FaCube },
+    { id: 'vacio', label: '8. Conductos y mangueras de vacío', icon: FaCube },
     { id: 'maquina', label: '9. Maquina de mangueras', icon: FaTools },
     { id: 'protector', label: '10. Protector de manguera', icon: FaCheck },
   ];

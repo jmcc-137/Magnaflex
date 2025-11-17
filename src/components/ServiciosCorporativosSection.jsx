@@ -31,13 +31,13 @@ const ServicioFila = ({ titulo, descripcion, puntos, imagen, icono, invertido })
 );
 
 const ServiciosCorporativosSection = () => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const translatedServices = CORPORATE_SERVICE_TRANSLATIONS[language] || CORPORATE_SERVICE_TRANSLATIONS.es;
   
   return (
   <section className="w-full py-12 bg-[#F5F6F8] flex flex-col items-center justify-center">
     <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-center text-[#23272A] mb-8 max-w-3xl mx-auto">
-      Servicios que ofrecemos
+      {t('serviciosCorporativos.title')}
     </h2>
     <div className="w-full max-w-6xl mx-auto">
       {translatedServices.map((servicio, idx) => (

@@ -21,7 +21,7 @@ export const navbarLinks = [
       { id: 3.5, title: "Manguera de goma para automóvil", link: "/productos#automovil" },
       { id: 3.6, title: "Manguera de silicona", link: "/productos#silicona" },
       { id: 3.7, title: "Manguera de PVC", link: "/productos#pvc" },
-      { id: 3.8, title: "CONDUCTOS Y MANGUERAS DE VACÍO", link: "/productos#vacio" },
+      { id: 3.8, title: "Conductos y mangueras de vacío", link: "/productos#vacio" },
       { id: 3.9, title: "Maquina de mangueras", link: "/productos#maquina" },
       { id: 3.10, title: "Protector de manguera", link: "/productos#protector" },
     ]

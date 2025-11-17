@@ -22,13 +22,13 @@ const ServicioCard = ({ titulo, descripcion, imagen }) => (
 );
 
 const ServiciosSection = () => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const translatedServices = SERVICE_TRANSLATIONS[language] || SERVICE_TRANSLATIONS.es;
 
   return (
   <section className="w-full py-12 bg-[#23272A] flex flex-col items-center justify-center">
     <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-8 max-w-3xl mx-auto">
-      Fabricamos mangueras de alta calidad<br />que garantizan seguridad y durabilidad en todos los rubros.
+      {t('servicios.title')}<br />{t('servicios.subtitle')}
     </h2>
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-7xl px-2 mb-8 relative">
       {translatedServices.map((s, i) => {
@@ -63,7 +63,7 @@ const ServiciosSection = () => {
       })}
     </div>
     <button className="mt-4 px-8 py-3 bg-white text-[#003366] font-semibold rounded-full shadow border border-[#4C4C4C] hover:bg-[#FFD700] transition">
-      Explora nuestros servicios ➔
+      {t('servicios.explore_button')}
     </button>
   </section>
   );

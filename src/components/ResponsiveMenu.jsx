@@ -138,15 +138,16 @@ const ResponsiveMenu = ({ open, navbarLinks, setOpen, navOpacity = 0 }) => {
               </nav>
 
               {/* Sección inferior - Idioma y contacto */}
-              <div className="mt-8 pt-6 border-t space-y-4" style={{ borderColor: COLORS.gray200 }}>
+              <div className="pt-0 border-t space-y-4" style={{ borderColor: COLORS.gray200 }}>
                 {/* Language Switcher */}
-                <div className="px-4">
+                <div className="px-4 pt-4">
                   <LanguageSwitcher 
                     currentLanguage={language}
                     onLanguageChange={(newLang) => {
                       setLanguage(newLang);
                     }}
                     navOpacity={1}
+                    isResponsive={true}
                   />
                 </div>
 

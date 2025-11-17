@@ -96,6 +96,7 @@ const NavBar = () => {
               currentLanguage={language} 
               onLanguageChange={setLanguage}
               navOpacity={navbarOpacity}
+              isResponsive={true}
             />
             <div className="flex gap-6">
               <div className="w-8 h-8 bg-white rounded flex items-center justify-center">

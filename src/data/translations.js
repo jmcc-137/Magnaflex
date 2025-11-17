@@ -55,6 +55,16 @@ export const translations = {
       contact: 'Contacto',
       language: 'Idioma',
     },
+    // Slider de Productos (Inicio)
+    sliderProductos: {
+      title: 'MODELOS',
+    },
+    // Servicios
+    servicios: {
+      title: 'Fabricamos mangueras de alta calidad',
+      subtitle: 'que garantizan seguridad y durabilidad en todos los rubros.',
+      explore_button: 'Explora nuestros servicios ➔',
+    },
     // Servicios Corporativos
     serviciosCorporativos: {
       title: 'Servicios que ofrecemos',
@@ -129,7 +139,7 @@ export const translations = {
       location_title: 'Ubicación y Datos Legales',
       main_location: 'Ubicación Principal',
       address: 'Carrera 22 # 45-67, Zona Industrial',
-      city_country: 'Bucaramanga, Santander - Colombia',
+      city_country: 'Barinas, Venezuela',
       hours_title: 'Horarios',
       mon_to_sat: 'Lunes a Sábado:',
       technical_support_hours: 'Soporte Técnico:',
@@ -194,6 +204,16 @@ export const translations = {
       services: 'Services',
       contact: 'Contact',
       language: 'Language',
+    },
+    // Slider de Productos (Inicio)
+    sliderProductos: {
+      title: 'MODELS',
+    },
+    // Servicios
+    servicios: {
+      title: 'We manufacture high-quality hoses',
+      subtitle: 'that guarantee safety and durability in all areas.',
+      explore_button: 'Explore our services ➔',
     },
     // Servicios Corporativos
     serviciosCorporativos: {
@@ -269,7 +289,7 @@ export const translations = {
       location_title: 'Location and Legal Information',
       main_location: 'Main Location',
       address: 'Carrera 22 # 45-67, Industrial Zone',
-      city_country: 'Bucaramanga, Santander - Colombia',
+      city_country: 'Barinas, Venezuela',
       hours_title: 'Hours',
       mon_to_sat: 'Monday to Saturday:',
       technical_support_hours: 'Technical Support:',
@@ -334,6 +354,16 @@ export const translations = {
       services: 'Serviços',
       contact: 'Contato',
       language: 'Idioma',
+    },
+    // Slider de Produtos (Inicio)
+    sliderProductos: {
+      title: 'MODELOS',
+    },
+    // Servicios
+    servicios: {
+      title: 'Fabricamos mangueiras de alta qualidade',
+      subtitle: 'que garantem segurança e durabilidade em todas as áreas.',
+      explore_button: 'Explore nossos serviços ➔',
     },
     // Servicios Corporativos
     serviciosCorporativos: {
@@ -409,7 +439,7 @@ export const translations = {
       location_title: 'Localização e Informações Legais',
       main_location: 'Localização Principal',
       address: 'Carrera 22 # 45-67, Zona Industrial',
-      city_country: 'Bucaramanga, Santander - Colômbia',
+      city_country: 'Barinas, Venezuela',
       hours_title: 'Horários',
       mon_to_sat: 'Segunda a Sábado:',
       technical_support_hours: 'Suporte Técnico:',
@@ -474,6 +504,16 @@ export const translations = {
       services: 'Serviços',
       contact: 'Contato',
       language: 'Idioma',
+    },
+    // Slider de Produtos (Inicio)
+    sliderProductos: {
+      title: 'MODELOS',
+    },
+    // Servicios
+    servicios: {
+      title: 'Fabricamos mangueiras de alta qualidade',
+      subtitle: 'que garantem segurança e durabilidade em todas as áreas.',
+      explore_button: 'Explore nossos serviços ➔',
     },
     // Servicios Corporativos
     serviciosCorporativos: {
@@ -880,61 +920,25 @@ export const BRANCHES_TRANSLATIONS = {
   es: [
     {
       nombre: 'Sucursal Barinas',
-      direccion: '5201, Barinas, Venezuela',
+      direccion: 'Carrera 22 # 45-67, Zona Industrial, Barinas, Venezuela',
       telefono: '(0273) 123-4567',
       flag: '🇻🇪',
-    },
-    {
-      nombre: 'Sucursal CDMX',
-      direccion: 'Av. Insurgentes Sur 1234, Ciudad de México',
-      telefono: '(55) 1234-5678',
-      flag: '🇲🇽',
-    },
-    {
-      nombre: 'Sucursal Monterrey',
-      direccion: 'Av. Constitución 567, Monterrey, NL',
-      telefono: '(81) 8765-4321',
-      flag: '🇲🇽',
     }
   ],
   en: [
     {
       nombre: 'Barinas Branch',
-      direccion: '5201, Barinas, Venezuela',
+      direccion: 'Carrera 22 # 45-67, Industrial Zone, Barinas, Venezuela',
       telefono: '(0273) 123-4567',
       flag: '🇻🇪',
-    },
-    {
-      nombre: 'CDMX Branch',
-      direccion: 'Av. Insurgentes Sur 1234, Mexico City',
-      telefono: '(55) 1234-5678',
-      flag: '🇲🇽',
-    },
-    {
-      nombre: 'Monterrey Branch',
-      direccion: 'Av. Constitución 567, Monterrey, NL',
-      telefono: '(81) 8765-4321',
-      flag: '🇲🇽',
     }
   ],
   pt: [
     {
       nombre: 'Filial Barinas',
-      direccion: '5201, Barinas, Venezuela',
+      direccion: 'Carrera 22 # 45-67, Zona Industrial, Barinas, Venezuela',
       telefono: '(0273) 123-4567',
       flag: '🇻🇪',
-    },
-    {
-      nombre: 'Filial CDMX',
-      direccion: 'Av. Insurgentes Sul 1234, Cidade do México',
-      telefono: '(55) 1234-5678',
-      flag: '🇲🇽',
-    },
-    {
-      nombre: 'Filial Monterrey',
-      direccion: 'Av. Constitución 567, Monterrey, NL',
-      telefono: '(81) 8765-4321',
-      flag: '🇲🇽',
     }
   ]
 };

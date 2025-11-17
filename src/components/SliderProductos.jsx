@@ -8,7 +8,7 @@ import { PRODUCT_TRANSLATIONS } from '../data/translations';
 const SliderProductos = () => {
   const [index, setIndex] = useState(0);
   const intervalRef = useRef(null);
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const navigate = useNavigate();
 
   const next = () => setIndex((i) => (i + 1) % productos.length);
@@ -38,7 +38,7 @@ const SliderProductos = () => {
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       setIndex((i) => (i + 1) % productos.length);
-    }, 3500);
+    }, 5000);
     return () => clearInterval(intervalRef.current);
   }, []);
 
@@ -53,7 +53,7 @@ const SliderProductos = () => {
 
   return (
     <section className="relative w-full flex flex-col items-center justify-center py-10 md:py-20 bg-[#222222] min-h-[520px] md:min-h-[600px]">
-      <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-8 md:mb-12 text-center text-[#F2F2F2]">MODELOS</h2>
+      <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-8 md:mb-12 text-center text-[#F2F2F2]">{t('sliderProductos.title')}</h2>
       <div className="relative w-full max-w-6xl mx-auto flex items-center justify-center overflow-x-visible px-2 sm:px-6">
         {/* Flechas solo en tablet y desktop */}
         <button
@@ -74,7 +74,7 @@ const SliderProductos = () => {
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.8 }}
               className="flex items-center w-full gap-0"
               style={{ minHeight: '340px' }}
             >
@@ -83,21 +83,21 @@ const SliderProductos = () => {
                 <img
                   src={productos[(index - 1 + productos.length) % productos.length].imagen}
                   alt={translatedProducts[(index - 1 + productos.length) % productos.length].nombre}
-                  className="w-full max-w-[220px] md:max-w-[280px] h-40 md:h-40 object-cover rounded shadow-lg border-4 border-[#003366] bg-[#F2F2F2] mx-auto"
+                  className="w-full max-w-[220px] md:max-w-[280px] h-40 md:h-40 object-cover rounded shadow-lg bg-[#F2F2F2] mx-auto"
                   style={{ minWidth: '120px', minHeight: '120px' }}
                 />
-                <h4 className="text-lg font-bold mt-2 text-[#4C4C4C]">{translatedProducts[(index - 1 + productos.length) % productos.length].nombre}</h4>
+                <h4 className="text-lg font-bold mt-2 text-[#003366]">{translatedProducts[(index - 1 + productos.length) % productos.length].nombre}</h4>
               </div>
               {/* Producto actual */}
               <div className="flex flex-col md:flex-row items-center justify-center w-full md:w-[65%] gap-4 md:gap-8 bg-white rounded-xl shadow-xl p-4 md:p-8 z-20">
                 <img
                   src={productos[index].imagen}
                   alt={translatedProducts[index].nombre}
-                  className="w-full max-w-[320px] md:max-w-[400px] h-40 md:h-40 object-cover rounded shadow-lg border-4 border-[#003366] bg-[#F2F2F2] mx-auto"
+                  className="w-full max-w-[320px] md:max-w-[400px] h-40 md:h-40 object-cover rounded shadow-lg bg-[#F2F2F2] mx-auto"
                   style={{ minWidth: '160px', minHeight: '160px' }}
                 />
                 <div className="flex-1 text-center md:text-left mt-4 md:mt-0">
-                  <h3 className="text-lg font-bold mb-2 text-[#4C4C4C]">{translatedProducts[index].nombre}</h3>
+                  <h3 className="text-lg font-bold mb-2 text-[#003366]">{translatedProducts[index].nombre}</h3>
                   <p className="text-base text-[#4C4C4C] mb-4">{translatedProducts[index].descripcion}</p>
                   <button onClick={handleViewMore} className="bg-[#D32F2F] text-white font-semibold rounded-full px-6 py-2 sm:px-10 sm:py-4 text-base sm:text-xl shadow hover:bg-[#b80a24] transition">Más</button>
                 </div>
@@ -107,10 +107,10 @@ const SliderProductos = () => {
                 <img
                   src={productos[(index + 1) % productos.length].imagen}
                   alt={translatedProducts[(index + 1) % productos.length].nombre}
-                  className="w-full max-w-[220px] md:max-w-[280px] h-40 md:h-40 object-cover rounded shadow-lg border-4 border-[#003366] bg-[#F2F2F2] mx-auto"
+                  className="w-full max-w-[220px] md:max-w-[280px] h-40 md:h-40 object-cover rounded shadow-lg bg-[#F2F2F2] mx-auto"
                   style={{ minWidth: '120px', minHeight: '120px' }}
                 />
-                <h4 className="text-lg font-bold mt-2 text-[#4C4C4C]">{translatedProducts[(index + 1) % productos.length].nombre}</h4>
+                <h4 className="text-lg font-bold mt-2 text-[#003366]">{translatedProducts[(index + 1) % productos.length].nombre}</h4>
               </div>
             </motion.div>
           </AnimatePresence>

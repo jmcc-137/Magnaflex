@@ -10,8 +10,9 @@ import { motion, AnimatePresence } from 'framer-motion';
  * @param {string} currentLanguage - Idioma actual
  * @param {function} onLanguageChange - Callback cuando cambia el idioma
  * @param {number} navOpacity - Opacidad del navbar (0-1) para estilos dinámicos
+ * @param {boolean} isResponsive - Si es true, muestra "Lenguaje" en lugar del nombre del idioma
  */
-const LanguageSwitcher = ({ currentLanguage = 'es', onLanguageChange, navOpacity = 0 }) => {
+const LanguageSwitcher = ({ currentLanguage = 'es', onLanguageChange, navOpacity = 0, isResponsive = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
 
@@ -39,18 +40,22 @@ const LanguageSwitcher = ({ currentLanguage = 'es', onLanguageChange, navOpacity
       {/* Botón principal */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 border-2"
+        className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 border-2 ${
+          isResponsive ? 'w-full justify-between' : ''
+        }`}
         style={{ 
-          color: textColor,
-          borderColor: borderColor,
-          backgroundColor: hoverBgColor,
+          color: isResponsive ? COLORS.primary : textColor,
+          borderColor: isResponsive ? COLORS.primary : borderColor,
+          backgroundColor: isResponsive ? `${COLORS.primary}08` : hoverBgColor,
         }}
         title="Cambiar idioma"
       >
-        <span className="text-lg sm:text-xl">{currentLang?.flag}</span>
-        <span className="text-sm sm:text-base font-medium hidden sm:inline">
-          {currentLang?.name}
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-lg sm:text-xl">{currentLang?.flag}</span>
+          <span className="text-sm sm:text-base font-medium">
+            Lenguaje
+          </span>
+        </div>
         <svg
           className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
@@ -82,7 +87,6 @@ const LanguageSwitcher = ({ currentLanguage = 'es', onLanguageChange, navOpacity
                     onClick={() => {
                       onLanguageChange(lang.code);
                       setIsOpen(false);
-                      setTimeout(() => window.location.reload(), 300);
                     }}
                     className={`w-full text-left px-4 py-3 flex items-center gap-3 transition-colors duration-200 ${
                       currentLanguage === lang.code
