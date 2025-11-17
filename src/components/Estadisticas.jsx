@@ -1,22 +1,23 @@
 import React from 'react';
 import { FaHistory, FaSmile, FaBoxes } from 'react-icons/fa';
 import { COLORS, ANIMATIONS } from '../constants/theme';
+import { useLanguage } from '../hooks';
+import { STATS_TRANSLATIONS } from '../data/translations';
 
 const Estadisticas = () => {
+  const { language } = useLanguage();
+  const statsData = STATS_TRANSLATIONS[language] || STATS_TRANSLATIONS.es;
   const stats = [
     {
-      numero: '10',
-      label: 'Años de experiencia',
+      ...statsData[0],
       icon: FaHistory
     },
     {
-      numero: '+5K',
-      label: 'Clientes satisfechos',
+      ...statsData[1],
       icon: FaSmile
     },
     {
-      numero: '+100',
-      label: 'Productos en stock',
+      ...statsData[2],
       icon: FaBoxes
     }
   ];

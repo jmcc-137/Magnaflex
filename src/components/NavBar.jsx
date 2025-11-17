@@ -1,10 +1,9 @@
-
 import { FaDumbbell } from 'react-icons/fa';
 import { FaFacebookSquare } from "react-icons/fa";
 import { LuInstagram } from "react-icons/lu";
 import { FaTiktok } from "react-icons/fa";
 import { navbarLinks } from '../data/data.js';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { CiSearch } from 'react-icons/ci';
 import { PiShoppingCartThin } from 'react-icons/pi';
 import { MdMenu } from 'react-icons/md';
@@ -14,20 +13,30 @@ import ResponsiveMenu from './ResponsiveMenu.jsx';
 import { MdClose } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
 import { COLORS, SHADOWS } from '../constants/theme';
-import { useScrollOpacity } from '../hooks';
+import { useScrollOpacity, useLanguage } from '../hooks';
 import { navLinkPropType } from '../validators/propValidators';
+import LanguageSwitcher from './LanguageSwitcher';
+import ProductDropdown from './ProductDropdown';
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const navOpacity = useScrollOpacity(120);
+  const { language, setLanguage, t } = useLanguage();
+  const location = useLocation();
+
+  // Usar siempre el efecto scroll
+  const navbarOpacity = navOpacity;
+  const navbarBackground = `rgba(255,255,255,${navbarOpacity})`;
+  const navbarShadow = navbarOpacity > 0.1 ? SHADOWS.navbar : SHADOWS.sm;
+  const navbarBackdrop = navbarOpacity > 0.1 ? 'blur(2px)' : 'none';
 
   return (
     <>
       <nav
         className="w-full fixed top-0 left-0 z-50 transition-colors duration-500"
         style={{
-          background: `rgba(255,255,255,${navOpacity})`,
-          boxShadow: navOpacity > 0.1 ? SHADOWS.navbar : SHADOWS.sm,
-          backdropFilter: navOpacity > 0.1 ? 'blur(2px)' : 'none',
+          background: navbarBackground,
+          boxShadow: navbarShadow,
+          backdropFilter: navbarBackdrop,
         }}
       >
         <div className="max-w-[1700px] w-full mx-auto grid grid-cols-3 items-center py-6 px-4 sm:py-4 sm:px-4 md:px-8 md:py-6 lg:py-8 lg:px-10">
@@ -50,35 +59,44 @@ const NavBar = () => {
           <ul className="hidden lg:flex items-center justify-center gap-8 md:gap-16 lg:gap-20 text-base md:text-lg lg:text-xl font-medium">
             {navbarLinks.map((item) => (
               <li key={item.id} className="relative flex items-center justify-center">
-                <NavLink
-                  to={item.link}
-                  className={({ isActive }) =>
-                    `px-2 py-1 font-medium transition-colors duration-200 ${navOpacity < 0.5 ? 'text-white' : 'text-black'} ${isActive ? 'text-primary' : ''}`
-                  }
-                >
-                  {({ isActive }) => (
-                    <>
-                      {/* Línea superior */}
-                      <span
-                        className={`absolute left-0 right-0 top-0 h-[3px] rounded transition-all duration-300 ${isActive ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`}
-                        style={{ transformOrigin: 'left', background: COLORS.primary }}
-                      />
-                      {/* Texto */}
-                      {item.title}
-                      {/* Línea inferior */}
-                      <span
-                        className={`absolute left-0 right-0 bottom-0 h-[3px] rounded transition-all duration-300 ${isActive ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`}
-                        style={{ transformOrigin: 'left', background: COLORS.primary }}
-                      />
-                    </>
-                  )}
-                </NavLink>
+                {item.submenu ? (
+                  <ProductDropdown navOpacity={navbarOpacity} submenu={item.submenu} isActive={location.pathname === '/productos'} />
+                ) : (
+                  <NavLink
+                    to={item.link}
+                    className={({ isActive }) =>
+                      `px-2 py-1 font-medium transition-colors duration-200 ${navOpacity < 0.5 ? 'text-white' : 'text-black'} ${isActive ? 'text-primary' : ''}`
+                    }
+                  >
+                    {({ isActive }) => (
+                      <>
+                        {/* Línea superior */}
+                        <span
+                          className={`absolute left-0 right-0 top-0 h-[3px] rounded transition-all duration-300 ${isActive ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`}
+                          style={{ transformOrigin: 'left', background: COLORS.primary }}
+                        />
+                        {/* Texto traducido */}
+                        {t(`navbar.${item.id === 1 ? 'inicio' : item.id === 2 ? 'nosotros' : item.id === 3 ? 'productos' : 'contactos'}`)}
+                        {/* Línea inferior */}
+                        <span
+                          className={`absolute left-0 right-0 bottom-0 h-[3px] rounded transition-all duration-300 ${isActive ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`}
+                          style={{ transformOrigin: 'left', background: COLORS.primary }}
+                        />
+                      </>
+                    )}
+                  </NavLink>
+                )}
               </li>
             ))}
           </ul>
 
           {/* Redes sociales */}
           <div className="hidden lg:flex items-center gap-4 md:gap-8 lg:gap-16 justify-end">
+            <LanguageSwitcher 
+              currentLanguage={language} 
+              onLanguageChange={setLanguage}
+              navOpacity={navbarOpacity}
+            />
             <div className="flex gap-6">
               <div className="w-8 h-8 bg-white rounded flex items-center justify-center">
                 <FaFacebookSquare className="text-black text-2xl" />
@@ -103,7 +121,7 @@ const NavBar = () => {
         </div>
       </nav>
       {/* Mobile Sidebar section */}
-      <ResponsiveMenu open={open} navbarLinks={navbarLinks} setOpen={setOpen} navOpacity={navOpacity} />
+      <ResponsiveMenu open={open} navbarLinks={navbarLinks} setOpen={setOpen} navOpacity={navbarOpacity} />
     </>
   );
 };

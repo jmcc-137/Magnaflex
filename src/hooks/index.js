@@ -4,3 +4,5 @@
 export { useCarousel } from './useCarousel';
 export { useScrollOpacity } from './useScrollOpacity';
 export { useTouchGestures } from './useTouchGestures';
+export { usePageTitle } from './usePageTitle';
+export { useLanguage } from './useLanguage';

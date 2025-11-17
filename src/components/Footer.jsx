@@ -23,7 +23,7 @@ const social = [
 const Footer = () => (
   <footer className="w-full bg-gray-600 text-[#F2F2F2] py-8 mt-12">
     <div className="max-w-7xl mx-auto px-4">
-      <hr className="border-[#000] mb-6" />
+      <hr className="border-black mb-6" />
       <div className="flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
           <span className="text-sm">© 2025. Magnaflex</span>

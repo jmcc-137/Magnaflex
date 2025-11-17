@@ -1,10 +1,14 @@
 import React, { useState, useRef } from 'react';
 import { FaVolumeMute, FaVolumeUp, FaBullseye, FaEye } from 'react-icons/fa';
 import { COLORS, GRADIENTS } from '../constants/theme';
+import { useLanguage } from '../hooks';
+import { MISSION_VISION_TRANSLATIONS } from '../data/translations';
 
 const MisionVision = () => {
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef(null);
+  const { language } = useLanguage();
+  const t = MISSION_VISION_TRANSLATIONS[language] || MISSION_VISION_TRANSLATIONS.es;
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -25,11 +29,11 @@ const MisionVision = () => {
                 <div className="text-4xl" style={{ color: COLORS.primary }}>
                   <FaBullseye />
                 </div>
-                <p className="text-sm font-semibold tracking-wide uppercase" style={{ color: COLORS.primary }}>EL OBJETIVO</p>
+                <p className="text-sm font-semibold tracking-wide uppercase" style={{ color: COLORS.primary }}>{t.mission_label}</p>
               </div>
-              <h2 className="text-4xl sm:text-5xl font-bold mb-6" style={{ color: COLORS.darkText }}>Nuestra Misión</h2>
+              <h2 className="text-4xl sm:text-5xl font-bold mb-6" style={{ color: COLORS.darkText }}>{t.mission_title}</h2>
               <p className="text-lg leading-relaxed" style={{ color: COLORS.gray700 }}>
-                Ofrecer productos hidráulicos e industriales de la más alta calidad a precios competitivos, respaldados por un servicio excepcional. Nos esforzamos por ser más que un proveedor, queremos ser tu socio de confianza, acompañándote en cada etapa de tu proyecto, desde la selección de productos hasta la instalación y el mantenimiento.
+                {t.mission_desc}
               </p>
             </div>
 
@@ -62,11 +66,16 @@ const MisionVision = () => {
                 <div className="text-4xl" style={{ color: COLORS.primary }}>
                   <FaEye />
                 </div>
-                <p className="text-sm font-semibold tracking-wide uppercase" style={{ color: COLORS.primary }}>LA PERSPECTIVA</p>
+                <p className="text-sm font-semibold tracking-wide uppercase" style={{ color: COLORS.primary }}>{t.vision_label}</p>
               </div>
-              <h2 className="text-4xl sm:text-5xl font-bold mb-6" style={{ color: COLORS.darkText }}>Nuestra Visión</h2>
+              <h2 className="text-4xl sm:text-5xl font-bold mb-6" style={{ color: COLORS.darkText }}>{t.vision_title}</h2>
               <p className="text-lg leading-relaxed" style={{ color: COLORS.gray700 }}>
-                Creemos en construir relaciones duraderas basadas en la confianza y el entendimiento mutuo. Ya sea que necesites productos para un proyecto específico o busques un proveedor confiable para tu negocio, en MagnaFlex encontrarás la <span className="font-bold" style={{ color: COLORS.primary }}>calidad, innovación y servicio</span> que mereces.
+                {t.vision_desc.split(t.vision_highlight).map((part, i) => (
+                  <span key={i}>
+                    {part}
+                    {i === 0 && <span className="font-bold" style={{ color: COLORS.primary }}>{t.vision_highlight}</span>}
+                  </span>
+                ))}
               </p>
             </div>
 

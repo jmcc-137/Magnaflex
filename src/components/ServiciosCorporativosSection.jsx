@@ -1,6 +1,8 @@
 import React from 'react';
 import { FaHeadset, FaTruckMoving, FaRegCheckCircle } from 'react-icons/fa';
 import { serviciosCorporativos } from '../data/data_serviciosCorporativos';
+import { useLanguage } from '../hooks';
+import { CORPORATE_SERVICE_TRANSLATIONS } from '../data/translations';
 
 const iconosMap = {
   FaHeadset: <FaHeadset className="text-3xl text-[#23272A]" />,
@@ -28,17 +30,22 @@ const ServicioFila = ({ titulo, descripcion, puntos, imagen, icono, invertido })
   </div>
 );
 
-const ServiciosCorporativosSection = () => (
+const ServiciosCorporativosSection = () => {
+  const { language } = useLanguage();
+  const translatedServices = CORPORATE_SERVICE_TRANSLATIONS[language] || CORPORATE_SERVICE_TRANSLATIONS.es;
+  
+  return (
   <section className="w-full py-12 bg-[#F5F6F8] flex flex-col items-center justify-center">
     <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-center text-[#23272A] mb-8 max-w-3xl mx-auto">
       Servicios que ofrecemos
     </h2>
     <div className="w-full max-w-6xl mx-auto">
-      {serviciosCorporativos.map((servicio, idx) => (
-        <ServicioFila key={idx} {...servicio} invertido={idx % 2 === 1} />
+      {translatedServices.map((servicio, idx) => (
+        <ServicioFila key={idx} {...servicio} imagen={serviciosCorporativos[idx].imagen} icono={serviciosCorporativos[idx].icono} invertido={idx % 2 === 1} />
       ))}
     </div>
   </section>
-);
+  );
+};
 
 export default ServiciosCorporativosSection;

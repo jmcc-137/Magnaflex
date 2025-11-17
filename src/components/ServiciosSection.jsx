@@ -5,6 +5,8 @@ import { MdAgriculture } from "react-icons/md";
 import { GiFactory } from "react-icons/gi";
 import { FaTruck } from "react-icons/fa";
 import { servicios } from '../data/data_servicios';
+import { useLanguage } from '../hooks';
+import { SERVICE_TRANSLATIONS } from '../data/translations';
 
 const ServicioCard = ({ titulo, descripcion, imagen }) => (
   <div
@@ -19,13 +21,17 @@ const ServicioCard = ({ titulo, descripcion, imagen }) => (
   </div>
 );
 
-const ServiciosSection = () => (
+const ServiciosSection = () => {
+  const { language } = useLanguage();
+  const translatedServices = SERVICE_TRANSLATIONS[language] || SERVICE_TRANSLATIONS.es;
+
+  return (
   <section className="w-full py-12 bg-[#23272A] flex flex-col items-center justify-center">
     <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-8 max-w-3xl mx-auto">
       Fabricamos mangueras de alta calidad<br />que garantizan seguridad y durabilidad en todos los rubros.
     </h2>
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-7xl px-2 mb-8 relative">
-      {servicios.map((s, i) => {
+      {translatedServices.map((s, i) => {
         // Definir el arco con transformaciones
         let arco = 'translateY(0px) scale(1)';
         if (typeof window !== 'undefined') {
@@ -51,7 +57,7 @@ const ServiciosSection = () => (
             style={{ transform: arco, zIndex: i === 1 || i === 2 ? 2 : 1 }}
             className="transition-transform duration-500"
           >
-            <ServicioCard {...s} />
+            <ServicioCard {...s} imagen={servicios[i].imagen} />
           </div>
         );
       })}
@@ -60,6 +66,7 @@ const ServiciosSection = () => (
       Explora nuestros servicios ➔
     </button>
   </section>
-);
+  );
+};
 
 export default ServiciosSection;
