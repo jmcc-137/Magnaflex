@@ -99,15 +99,15 @@ const NavBar = () => {
               isResponsive={true}
             />
             <div className="flex gap-6">
-              <div className="w-8 h-8 bg-white rounded flex items-center justify-center">
+              <a href="https://www.facebook.com/share/17tmnTEatD/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white rounded flex items-center justify-center hover:opacity-80 transition">
                 <FaFacebookSquare className="text-black text-2xl" />
-              </div>
-              <div className="w-8 h-8 bg-white rounded flex items-center justify-center">
+              </a>
+              <a href="https://www.instagram.com/magnaflex.ve?igsh=dW4xd3BramU2OXd4" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white rounded flex items-center justify-center hover:opacity-80 transition">
                 <LuInstagram className="text-black text-2xl" />
-              </div>
-              <div className="w-8 h-8 bg-white rounded flex items-center justify-center">
+              </a>
+              <a href="https://www.tiktok.com/@magnaflex?_r=1&_t=ZM-91VZQpvSZXn" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white rounded flex items-center justify-center hover:opacity-80 transition">
                 <FaTiktok className="text-black text-2xl" />
-              </div>
+              </a>
             </div>
           </div>
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MdExpandMore } from 'react-icons/md';
@@ -7,7 +7,7 @@ import { useLanguage } from '../hooks';
 
 const ProductDropdown = ({ navOpacity, submenu, isActive }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const dropdownRef = useRef(null);
   const location = useLocation();
 
@@ -60,6 +60,11 @@ const ProductDropdown = ({ navOpacity, submenu, isActive }) => {
       return hash.substring(1); // Remover el #
     }
     return null;
+  };
+
+  // Obtener el nombre traducido de la categoría
+  const getCategoryTranslation = (categoryId) => {
+    return t(`productos.cat_${categoryId}`, categoryId);
   };
 
   const activeLink = getActiveLinkFromUrl();
@@ -119,7 +124,7 @@ const ProductDropdown = ({ navOpacity, submenu, isActive }) => {
                     }`}
                     onClick={() => setIsOpen(false)}
                   >
-                    <span className="text-sm">{item.title}</span>
+                    <span className="text-sm">{getCategoryTranslation(itemId)}</span>
                   </NavLink>
                 );
               })}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { usePageTitle } from '../hooks';
 import { PAGE_NAMES } from '../components/PageHeaderIcons';
 import { useLocation } from 'react-router-dom';
@@ -18,28 +18,41 @@ const Productos = () => {
   const [activeCategory, setActiveCategory] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  const categories = [
-    { id: 'hidraulica', label: '1. Manguera hidráulica', icon: FaTint },
-    { id: 'industrial', label: '2. Manguera industrial', icon: FaBuilding },
-    { id: 'accesorios', label: '3. Accesorios hidráulicos', icon: FaWrench },
-    { id: 'neumatica', label: '4. Manguera neumática', icon: FaWind },
-    { id: 'automovil', label: '5. Manguera de goma para automóvil', icon: FaCar },
-    { id: 'silicona', label: '6. Manguera de silicona', icon: FaSquare },
-    { id: 'pvc', label: '7. Manguera de PVC', icon: FaBox },
-    { id: 'vacio', label: '8. Conductos y mangueras de vacío', icon: FaCube },
-    { id: 'maquina', label: '9. Maquina de mangueras', icon: FaTools },
-    { id: 'protector', label: '10. Protector de manguera', icon: FaCheck },
+  const categoriesData = [
+    { id: 'todo', icon: FaCheck },
+    { id: 'hidraulica', icon: FaTint },
+    { id: 'industrial', icon: FaBuilding },
+    { id: 'accesorios', icon: FaWrench },
+    { id: 'neumatica', icon: FaWind },
+    { id: 'automovil', icon: FaCar },
+    { id: 'silicona', icon: FaSquare },
+    { id: 'pvc', icon: FaBox },
+    { id: 'vacio', icon: FaCube },
+    { id: 'maquina', icon: FaTools },
+    { id: 'protector', icon: FaCheck },
   ];
 
-  const products = PRODUCT_TRANSLATIONS[language] || PRODUCT_TRANSLATIONS.es;
+  const categories = useMemo(() => 
+    categoriesData.map((cat, idx) => ({
+      ...cat,
+      label: `${idx + 1}. ${t(`productos.cat_${cat.id}`)}`,
+    })),
+    [language]
+  );
+
+  const products = useMemo(
+    () => PRODUCT_TRANSLATIONS[language] || PRODUCT_TRANSLATIONS.es,
+    [language]
+  );
 
   // Mapeo de categorías a índices de productos
   const categoryProductMap = {
-    hidraulica: [0],
+    todo: [],
+    hidraulica: [0, 7, 8, 9, 10, 11, 12, 13, 46],
     industrial: [1],
-    accesorios: [2],
+    accesorios: [2, 19, 47],
     neumatica: [3],
-    automovil: [4],
+    automovil: [4, 6, 14, 15, 16, 17, 18],
     silicona: [5],
     pvc: [6],
     vacio: [6],
@@ -60,8 +73,10 @@ const Productos = () => {
     let filtered = products;
 
     if (activeCategory) {
-      const categoryIndices = categoryProductMap[activeCategory] || [];
-      filtered = filtered.filter((_, idx) => categoryIndices.includes(idx));
+      if (activeCategory !== 'todo') {
+        const categoryIndices = categoryProductMap[activeCategory] || [];
+        filtered = filtered.filter((_, idx) => categoryIndices.includes(idx));
+      }
     }
 
     if (searchTerm) {
@@ -73,7 +88,7 @@ const Productos = () => {
     }
 
     setFilteredProducts(filtered);
-  }, [activeCategory, searchTerm, language]);
+  }, [activeCategory, searchTerm, products]);
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -168,11 +183,12 @@ const Productos = () => {
 
               {filteredProducts.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {filteredProducts.map((product, index) => {
-                    // Encontrar el índice real del producto en el array de traducciones
-                    const realIndex = products.findIndex(p => p.nombre === product.nombre);
+                  {filteredProducts.map((product) => {
+                    // Usar el id único del producto y su posición real para navegación
+                    const realIndex = products.findIndex(p => p.id === product.id);
+                    const key = product.id ?? realIndex;
                     return (
-                      <ProductCard key={realIndex} product={product} index={realIndex} />
+                      <ProductCard key={key} product={product} index={realIndex} />
                     );
                   })}
                 </div>

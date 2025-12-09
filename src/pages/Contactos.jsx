@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { usePageTitle } from '../hooks';
 import { PAGE_NAMES } from '../components/PageHeaderIcons';
 import { useLanguage } from '../hooks';
-import { FaPhone, FaEnvelope, FaWhatsapp, FaMapMarkerAlt, FaClock, FaTools, FaBox, FaCheckCircle, FaFacebookF, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaWhatsapp, FaMapMarkerAlt, FaClock, FaTools, FaBox, FaCheckCircle, FaFacebookF, FaInstagram, FaTiktok } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { COLORS } from '../constants/theme';
 import Footer from '../components/Footer';
@@ -464,16 +464,22 @@ const Contactos = () => {
               <div className="bg-white rounded-xl p-8 shadow-lg border-l-4" style={{ borderLeftColor: COLORS.primary }}>
                 <h3 className="text-xl font-bold mb-4" style={{ color: COLORS.primary }}>{t('contactos.follow_us')}</h3>
                 <div className="flex gap-4">
-                  {[FaFacebookF, FaInstagram, FaLinkedin].map((Icon, idx) => (
+                  {[
+                    { Icon: FaFacebookF, url: 'https://www.facebook.com/share/17tmnTEatD/?mibextid=wwXIfr' },
+                    { Icon: FaInstagram, url: 'https://www.instagram.com/magnaflex.ve?igsh=dW4xd3BramU2OXd4' },
+                    { Icon: FaTiktok, url: 'https://www.tiktok.com/@magnaflex?_r=1&_t=ZM-91VZQpvSZXn' }
+                  ].map((social, idx) => (
                     <a
                       key={idx}
-                      href="#"
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="w-12 h-12 rounded-full flex items-center justify-center transition-all hover:text-white hover:scale-110"
                       style={{ backgroundColor: `${COLORS.primary}20`, color: COLORS.primary }}
                       onMouseEnter={(e) => e.currentTarget.style.backgroundColor = COLORS.primary}
                       onMouseLeave={(e) => e.currentTarget.style.backgroundColor = `${COLORS.primary}20`}
                     >
-                      <Icon className="text-xl" />
+                      <social.Icon className="text-xl" />
                     </a>
                   ))}
                 </div>
