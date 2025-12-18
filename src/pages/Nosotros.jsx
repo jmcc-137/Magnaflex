@@ -7,6 +7,7 @@ import { COLORS, GRADIENTS, SHADOWS } from '../constants/theme';
 import SloganCarousel from '../components/SloganCarousel';
 import MisionVision from '../components/MisionVision';
 import Pieza3D from '../components/Pieza3D';
+import Logo3D from '../components/Logo3D';
 import Estadisticas from '../components/Estadisticas';
 import Footer from '../components/Footer';
 import { PAGE_NAMES } from '../components/PageHeaderIcons';
@@ -35,9 +36,9 @@ const Nosotros = () => {
               </p>
             </div>
 
-            {/* Pieza 3D Derecha */}
+            {/* Logo 3D Derecha */}
             <div className="flex-1 w-full flex justify-center">
-              <Pieza3D />
+              <Logo3D />
             </div>
           </div>
         </div>

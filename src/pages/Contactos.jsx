@@ -67,23 +67,7 @@ const Contactos = () => {
         { label: t('contactos.whatsapp'), value: '+57 300 234 5678', action: 'whatsapp' }
       ],
       description: t('contactos.support_desc')
-    },
-    {
-      title: t('contactos.workshop_title'),
-      icon: FaBox,
-      items: [
-        { label: t('contactos.phone'), value: '+57 (7) 600 1003', action: 'tel' },
-        { label: t('contactos.email'), value: 'taller@magnaflex.com', action: 'email' },
-        { label: t('contactos.location'), value: 'Cra 22 # 45-67, Zona Industrial', action: 'map' }
-      ],
-      description: t('contactos.workshop_desc')
     }
-  ];
-
-  const horarios = [
-    { titulo: t('contactos.sales_type'), horario: t('contactos.sales_hours'), icon: FaPhone },
-    { titulo: t('contactos.support_title'), horario: t('contactos.support_hours'), icon: FaTools },
-    { titulo: t('contactos.workshop_title'), horario: t('contactos.workshop_hours'), icon: FaBox }
   ];
 
   const razones = [
@@ -203,35 +187,6 @@ const Contactos = () => {
               </motion.div>
             );
           })}
-        </div>
-      </div>
-
-      {/* Horarios de atención */}
-      <div className="bg-white py-12 mb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">{t('contactos.immediate_attention')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {horarios.map((horario, idx) => {
-              const IconComponent = horario.icon;
-              return (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.3 + idx * 0.1 }}
-                  className="flex flex-col items-center p-8 rounded-xl border-2 transition-all hover:shadow-lg"
-                  style={{ 
-                    borderColor: COLORS.primary,
-                    backgroundColor: `${COLORS.primary}05`
-                  }}
-                >
-                  <IconComponent className="text-4xl mb-4" style={{ color: COLORS.primary }} />
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">{horario.titulo}</h3>
-                  <p className="text-lg font-semibold text-gray-600 text-center">{horario.horario}</p>
-                </motion.div>
-              );
-            })}
-          </div>
         </div>
       </div>
 

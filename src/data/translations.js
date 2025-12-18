@@ -61,8 +61,8 @@ export const translations = {
     },
     // Servicios
     servicios: {
-      title: 'Fabricamos mangueras de alta calidad',
-      subtitle: 'que garantizan seguridad y durabilidad en todos los rubros.',
+      title: 'Mangueras de alta calidad',
+      subtitle: 'Seguridad y durabilidad en cada proyecto.',
       explore_button: 'Explora nuestros servicios ➔',
     },
     // Servicios Corporativos
@@ -94,7 +94,7 @@ export const translations = {
       cat_silicona: 'Manguera de silicona',
       cat_pvc: 'Manguera de PVC',
       cat_vacio: 'Conductos y mangueras de vacío',
-      cat_maquina: 'Máquina de mangueras',
+      cat_maquina: 'Prensadora de mangueras',
       cat_protector: 'Protector de manguera',
     },
     // Contactos
@@ -223,8 +223,8 @@ export const translations = {
     },
     // Servicios
     servicios: {
-      title: 'We manufacture high-quality hoses',
-      subtitle: 'that guarantee safety and durability in all areas.',
+      title: 'High-quality hoses',
+      subtitle: 'Safety and durability in every project.',
       explore_button: 'Explore our services ➔',
     },
     // Servicios Corporativos
@@ -256,7 +256,7 @@ export const translations = {
       cat_silicona: 'Silicone Hose',
       cat_pvc: 'PVC Hose',
       cat_vacio: 'Vacuum Ducts and Hoses',
-      cat_maquina: 'Hose Machine',
+      cat_maquina: 'Hose Press',
       cat_protector: 'Hose Protector',
     },
     // Contactos
@@ -385,8 +385,8 @@ export const translations = {
     },
     // Servicios
     servicios: {
-      title: 'Fabricamos mangueiras de alta qualidade',
-      subtitle: 'que garantem segurança e durabilidade em todas as áreas.',
+      title: 'Mangueiras de alta qualidade',
+      subtitle: 'Segurança e durabilidade em cada projeto.',
       explore_button: 'Explore nossos serviços ➔',
     },
     // Servicios Corporativos
@@ -535,8 +535,8 @@ export const translations = {
     },
     // Servicios
     servicios: {
-      title: 'Fabricamos mangueiras de alta qualidade',
-      subtitle: 'que garantem segurança e durabilidade em todas as áreas.',
+      title: 'Mangueiras de alta qualidade',
+      subtitle: 'Segurança e durabilidade em cada projeto.',
       explore_button: 'Explore nossos serviços ➔',
     },
     // Servicios Corporativos
@@ -568,7 +568,7 @@ export const translations = {
       cat_silicona: 'Mangueira de Silicone',
       cat_pvc: 'Mangueira de PVC',
       cat_vacio: 'Condutas e Mangueiras de Vácuo',
-      cat_maquina: 'Máquina de Mangueiras',
+      cat_maquina: 'Prensadora de Mangueiras',
       cat_protector: 'Protetor de Mangueira',
     },
     // Contactos

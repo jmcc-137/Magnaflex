@@ -29,6 +29,7 @@ const LanguageSwitcher = ({ currentLanguage = 'es', onLanguageChange, navOpacity
   }, []);
 
   const currentLang = LANGUAGE_OPTIONS.find(lang => lang.code === currentLanguage);
+  const labelText = isResponsive ? 'Lenguaje' : (currentLang?.code?.toUpperCase() || 'ES');
   
   // Determinar color según scroll: blanco si navOpacity < 0.5, negro si >= 0.5
   const textColor = navOpacity < 0.5 ? '#FFFFFF' : '#000000';
@@ -36,25 +37,24 @@ const LanguageSwitcher = ({ currentLanguage = 'es', onLanguageChange, navOpacity
   const hoverBgColor = navOpacity < 0.5 ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)';
 
   return (
-    <div className="relative" ref={containerRef}>
+    <div className="relative flex-shrink-0" ref={containerRef}>
       {/* Botón principal */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 border-2 ${
-          isResponsive ? 'w-full justify-between' : ''
+        className={`inline-flex items-center gap-2 px-3 sm:px-3 py-2 rounded-lg transition-all duration-200 border ${
+          isResponsive ? 'w-full justify-between' : 'w-auto whitespace-nowrap'
         }`}
         style={{ 
           color: isResponsive ? COLORS.primary : textColor,
           borderColor: isResponsive ? COLORS.primary : borderColor,
           backgroundColor: isResponsive ? `${COLORS.primary}08` : hoverBgColor,
+          zIndex: 'auto'
         }}
         title="Cambiar idioma"
       >
         <div className="flex items-center gap-2">
           <span className="text-lg sm:text-xl">{currentLang?.flag}</span>
-          <span className="text-sm sm:text-base font-medium">
-            Lenguaje
-          </span>
+          <span className="text-sm sm:text-base font-medium">{labelText}</span>
         </div>
         <svg
           className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}

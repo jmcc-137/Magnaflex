@@ -7,7 +7,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 import { useState } from 'react';
 
 const ResponsiveMenu = ({ open, navbarLinks, setOpen, navOpacity = 0 }) => {
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
   const [openSubmenu, setOpenSubmenu] = useState(null);
   
   const menuAnimation = {
@@ -22,6 +22,15 @@ const ResponsiveMenu = ({ open, navbarLinks, setOpen, navOpacity = 0 }) => {
     animate: { opacity: 1 },
     exit: { opacity: 0 },
     transition: { duration: 0.3 },
+  };
+
+  const getNavLabel = (item) => {
+    // Mapear a las mismas keys usadas en el NavBar
+    if (item.id === 1) return t('navbar.inicio');
+    if (item.id === 2) return t('navbar.nosotros');
+    if (item.id === 3) return t('navbar.productos');
+    if (item.id === 4) return t('navbar.contactos');
+    return item.title;
   };
 
   const handleSubmenuClick = (itemId) => {
@@ -79,7 +88,7 @@ const ResponsiveMenu = ({ open, navbarLinks, setOpen, navOpacity = 0 }) => {
                               borderColor: COLORS.gray200
                             }}
                           >
-                            <span>{item.title}</span>
+                            <span>{getNavLabel(item)}</span>
                             <MdExpandMore
                               className={`transition-transform duration-300 ${
                                 openSubmenu === item.id ? 'rotate-180' : 'rotate-0'
@@ -129,7 +138,7 @@ const ResponsiveMenu = ({ open, navbarLinks, setOpen, navOpacity = 0 }) => {
                           }}
                           onClick={() => setOpen(false)}
                         >
-                          {item.title}
+                          {getNavLabel(item)}
                         </Link>
                       )}
                     </li>
