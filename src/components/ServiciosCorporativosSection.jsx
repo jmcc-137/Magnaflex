@@ -11,7 +11,7 @@ const iconosMap = {
 };
 
 const ServicioFila = ({ titulo, descripcion, puntos, imagen, icono, invertido }) => (
-  <div className={`flex flex-col md:flex-row items-center justify-between bg-[#BDBDBD] rounded-2xl shadow-md p-6 mb-8 transition-all duration-300 ${invertido ? 'md:flex-row-reverse' : ''}`}>
+  <div className={`flex flex-col md:flex-row items-center justify-between bg-[#BDBDBD] rounded-2xl shadow-md p-6 md:p-8 mb-8 transition-all duration-300 ${invertido ? 'md:flex-row-reverse' : ''}`}>
     <div className="flex-1 flex flex-col items-start justify-center text-left px-2 md:px-6">
       <div className="mb-2">{iconosMap[icono] || icono}</div>
       <h3 className="text-2xl font-bold text-[#23272A] mb-2">{titulo}</h3>
@@ -25,7 +25,7 @@ const ServicioFila = ({ titulo, descripcion, puntos, imagen, icono, invertido })
       )}
     </div>
     <div className="flex-1 flex items-center justify-center w-full md:w-1/2 mt-4 md:mt-0">
-      <img src={imagen} alt={titulo} className="rounded-xl object-cover w-full h-40 md:h-48 lg:h-56 shadow-lg" />
+      <img src={imagen} alt={titulo} className="rounded-xl object-cover object-center w-full max-w-[560px] h-56 md:h-64 lg:h-72 shadow-lg" />
     </div>
   </div>
 );

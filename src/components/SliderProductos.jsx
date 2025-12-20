@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { productos } from '../data/data_products';
+import { PRODUCTS } from '../data/data_products';
 import { useLanguage } from '../hooks';
 import { PRODUCT_TRANSLATIONS } from '../data/translations';
 
@@ -11,8 +11,8 @@ const SliderProductos = () => {
   const { language, t } = useLanguage();
   const navigate = useNavigate();
 
-  const next = () => setIndex((i) => (i + 1) % productos.length);
-  const prev = () => setIndex((i) => (i - 1 + productos.length) % productos.length);
+  const next = () => setIndex((i) => (i + 1) % PRODUCTS.length);
+  const prev = () => setIndex((i) => (i - 1 + PRODUCTS.length) % PRODUCTS.length);
 
   // Touch events para deslizar en móvil
   const touchStartX = useRef(null);
@@ -37,17 +37,19 @@ const SliderProductos = () => {
   // Movimiento automático
   useEffect(() => {
     intervalRef.current = setInterval(() => {
-      setIndex((i) => (i + 1) % productos.length);
+      setIndex((i) => (i + 1) % PRODUCTS.length);
     }, 5000);
     return () => clearInterval(intervalRef.current);
   }, []);
 
   // Obtener traducciones de productos
   const translatedProducts = PRODUCT_TRANSLATIONS[language] || PRODUCT_TRANSLATIONS.es;
+  const byId = new Map(translatedProducts.map((p) => [p.id, p]));
+  const merged = PRODUCTS.map((base) => ({ ...(byId.get(base.id) || {}), ...base })).filter((p) => p.nombre);
 
   // Navegar al detalle del producto
   const handleViewMore = () => {
-    const product = translatedProducts[index];
+    const product = merged[index];
     navigate(`/productos/${index}`, { state: { product } });
   };
 
@@ -81,36 +83,36 @@ const SliderProductos = () => {
               {/* Producto anterior parcialmente visible */}
               <div className="hidden md:flex flex-col items-center justify-center w-[25%] opacity-30 -mr-8 pointer-events-none select-none">
                 <img
-                  src={productos[(index - 1 + productos.length) % productos.length].imagen}
-                  alt={translatedProducts[(index - 1 + productos.length) % productos.length].nombre}
+                  src={merged[(index - 1 + merged.length) % merged.length]?.imagen}
+                  alt={merged[(index - 1 + merged.length) % merged.length]?.nombre}
                   className="w-full max-w-[220px] md:max-w-[280px] h-40 md:h-40 object-cover rounded shadow-lg bg-[#F2F2F2] mx-auto"
                   style={{ minWidth: '120px', minHeight: '120px' }}
                 />
-                <h4 className="text-lg font-bold mt-2 text-[#003366]">{translatedProducts[(index - 1 + productos.length) % productos.length].nombre}</h4>
+                <h4 className="text-lg font-bold mt-2 text-[#003366]">{merged[(index - 1 + merged.length) % merged.length]?.nombre}</h4>
               </div>
               {/* Producto actual */}
               <div className="flex flex-col md:flex-row items-center justify-center w-full md:w-[65%] gap-4 md:gap-8 bg-white rounded-xl shadow-xl p-4 md:p-8 z-20">
                 <img
-                  src={productos[index].imagen}
-                  alt={translatedProducts[index].nombre}
+                  src={merged[index]?.imagen}
+                  alt={merged[index]?.nombre}
                   className="w-full max-w-[320px] md:max-w-[400px] h-40 md:h-40 object-cover rounded shadow-lg bg-[#F2F2F2] mx-auto"
                   style={{ minWidth: '160px', minHeight: '160px' }}
                 />
                 <div className="flex-1 text-center md:text-left mt-4 md:mt-0">
-                  <h3 className="text-lg font-bold mb-2 text-[#003366]">{translatedProducts[index].nombre}</h3>
-                  <p className="text-base text-[#4C4C4C] mb-4">{translatedProducts[index].descripcion}</p>
+                  <h3 className="text-lg font-bold mb-2 text-[#003366]">{merged[index]?.nombre}</h3>
+                  <p className="text-base text-[#4C4C4C] mb-4">{merged[index]?.descripcion}</p>
                   <button onClick={handleViewMore} className="bg-[#D32F2F] text-white font-semibold rounded-full px-6 py-2 sm:px-10 sm:py-4 text-base sm:text-xl shadow hover:bg-[#b80a24] transition">Más</button>
                 </div>
               </div>
               {/* Producto siguiente parcialmente visible */}
               <div className="hidden md:flex flex-col items-center justify-center w-[25%] opacity-30 -ml-8 pointer-events-none select-none">
                 <img
-                  src={productos[(index + 1) % productos.length].imagen}
-                  alt={translatedProducts[(index + 1) % productos.length].nombre}
+                  src={merged[(index + 1) % merged.length]?.imagen}
+                  alt={merged[(index + 1) % merged.length]?.nombre}
                   className="w-full max-w-[220px] md:max-w-[280px] h-40 md:h-40 object-cover rounded shadow-lg bg-[#F2F2F2] mx-auto"
                   style={{ minWidth: '120px', minHeight: '120px' }}
                 />
-                <h4 className="text-lg font-bold mt-2 text-[#003366]">{translatedProducts[(index + 1) % productos.length].nombre}</h4>
+                <h4 className="text-lg font-bold mt-2 text-[#003366]">{merged[(index + 1) % merged.length]?.nombre}</h4>
               </div>
             </motion.div>
           </AnimatePresence>

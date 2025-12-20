@@ -9,6 +9,7 @@ import { useState } from 'react';
 const ResponsiveMenu = ({ open, navbarLinks, setOpen, navOpacity = 0 }) => {
   const { language, setLanguage, t } = useLanguage();
   const [openSubmenu, setOpenSubmenu] = useState(null);
+  const [openNested, setOpenNested] = useState(null);
   
   const menuAnimation = {
     initial: { x: '100%', opacity: 0 },
@@ -35,6 +36,11 @@ const ResponsiveMenu = ({ open, navbarLinks, setOpen, navOpacity = 0 }) => {
 
   const handleSubmenuClick = (itemId) => {
     setOpenSubmenu(openSubmenu === itemId ? null : itemId);
+    setOpenNested(null);
+  };
+
+  const handleNestedClick = (subItemId) => {
+    setOpenNested(openNested === subItemId ? null : subItemId);
   };
 
   return (
@@ -107,20 +113,60 @@ const ResponsiveMenu = ({ open, navbarLinks, setOpen, navOpacity = 0 }) => {
                                 <ul className="flex flex-col gap-0 bg-gray-50">
                                   {item.submenu.map((subitem) => (
                                     <li key={`submenu-item-${subitem.id}`}>
-                                      <Link
-                                        to={subitem.link}
-                                        className="block py-3 px-6 text-sm font-medium border-b transition-colors duration-200 hover:bg-blue-50 ml-4"
-                                        style={{ 
-                                          color: COLORS.darkText,
-                                          borderColor: COLORS.gray200
-                                        }}
-                                        onClick={() => {
-                                          setOpen(false);
-                                          setOpenSubmenu(null);
-                                        }}
-                                      >
-                                        {subitem.title}
-                                      </Link>
+                                      {subitem.subcategories ? (
+                                        <div>
+                                          <button
+                                            onClick={() => handleNestedClick(subitem.id)}
+                                            className="w-full flex items-center justify-between py-3 px-6 text-sm font-medium border-b transition-colors duration-200 hover:bg-gray-100 ml-4"
+                                            style={{ color: COLORS.darkText, borderColor: COLORS.gray200 }}
+                                          >
+                                            <span>{subitem.title}</span>
+                                            <MdExpandMore
+                                              className={`transition-transform duration-300 ${openNested === subitem.id ? 'rotate-180' : 'rotate-0'}`}
+                                            />
+                                          </button>
+                                          <AnimatePresence>
+                                            {openNested === subitem.id && (
+                                              <motion.ul
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: 'auto', opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.2 }}
+                                                className="overflow-hidden bg-gray-50 ml-8"
+                                              >
+                                                {subitem.subcategories.map((sc) => (
+                                                  <li key={`subcat-${sc.id}`}>
+                                                    <Link
+                                                      to={sc.link}
+                                                      className="block py-2 px-6 text-xs font-medium border-b transition-colors duration-200 hover:bg-blue-50"
+                                                      style={{ color: COLORS.darkText, borderColor: COLORS.gray200 }}
+                                                      onClick={() => {
+                                                        setOpen(false);
+                                                        setOpenSubmenu(null);
+                                                        setOpenNested(null);
+                                                      }}
+                                                    >
+                                                      {sc.title}
+                                                    </Link>
+                                                  </li>
+                                                ))}
+                                              </motion.ul>
+                                            )}
+                                          </AnimatePresence>
+                                        </div>
+                                      ) : (
+                                        <Link
+                                          to={subitem.link}
+                                          className="block py-3 px-6 text-sm font-medium border-b transition-colors duration-200 hover:bg-blue-50 ml-4"
+                                          style={{ color: COLORS.darkText, borderColor: COLORS.gray200 }}
+                                          onClick={() => {
+                                            setOpen(false);
+                                            setOpenSubmenu(null);
+                                          }}
+                                        >
+                                          {subitem.title}
+                                        </Link>
+                                      )}
                                     </li>
                                   ))}
                                 </ul>

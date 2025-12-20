@@ -84,10 +84,10 @@ const Contactos = () => {
       <div className="grow">
         {/* Hero Section con imagen de fondo */}
         <div 
-          className="relative w-full min-h-96 flex items-center justify-center pt-32 pb-12 bg-cover bg-center"
+          className="relative w-full min-h-96 flex items-center justify-center pt-32 pb-12 bg-cover"
           style={{
             backgroundImage: 'url(/Tecnica.jpg)',
-            backgroundPosition: 'center',
+            backgroundPosition: '80% 30%',
             backgroundSize: 'cover',
           }}
         >

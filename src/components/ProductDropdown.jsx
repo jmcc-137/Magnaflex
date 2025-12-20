@@ -7,6 +7,7 @@ import { useLanguage } from '../hooks';
 
 const ProductDropdown = ({ navOpacity, submenu, isActive }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [openCat, setOpenCat] = useState(null);
   const { t, language } = useLanguage();
   const dropdownRef = useRef(null);
   const location = useLocation();
@@ -62,12 +63,22 @@ const ProductDropdown = ({ navOpacity, submenu, isActive }) => {
     return null;
   };
 
+  const getActiveSubFromUrl = () => {
+    const hash = location.hash;
+    if (!hash) return null;
+    const raw = hash.substring(1);
+    const parts = raw.split('&');
+    const sub = parts.find((p) => p.startsWith('sub='));
+    return sub ? sub.split('=')[1] : null;
+  };
+
   // Obtener el nombre traducido de la categoría
   const getCategoryTranslation = (categoryId) => {
     return t(`productos.cat_${categoryId}`, categoryId);
   };
 
   const activeLink = getActiveLinkFromUrl();
+  const activeSub = getActiveSubFromUrl();
 
   return (
     <div
@@ -110,22 +121,46 @@ const ProductDropdown = ({ navOpacity, submenu, isActive }) => {
           >
             <div className="py-3">
               {submenu.map((item) => {
-                const itemId = item.link.split('#')[1]; // Extraer el id del hash
+                const itemId = item.link.split('#')[1]; // id de categoría
                 const isItemActive = activeLink === itemId;
+                const isOpenCat = openCat === item.id || (isItemActive && activeSub && item.subcategories);
 
                 return (
-                  <NavLink
-                    key={item.id}
-                    to={item.link}
-                    className={`block px-6 py-2 transition-colors duration-150 ${
-                      isItemActive
-                        ? 'bg-red-50 text-red-600 font-semibold border-l-4 border-red-600'
-                        : 'text-gray-800 hover:bg-blue-50'
-                    }`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <span className="text-sm">{getCategoryTranslation(itemId)}</span>
-                  </NavLink>
+                  <div key={item.id}>
+                    <div className={`flex items-center justify-between px-6 py-2 ${isItemActive ? 'bg-red-50 text-red-600 font-semibold border-l-4 border-red-600' : 'text-gray-800 hover:bg-blue-50'}`}>
+                      <NavLink
+                        to={item.link}
+                        className="text-sm"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {getCategoryTranslation(itemId)}
+                      </NavLink>
+                      {item.subcategories && (
+                        <button
+                          className="p-1 rounded hover:bg-gray-100"
+                          onClick={() => setOpenCat(isOpenCat ? null : item.id)}
+                          aria-label="Expandir subcategorías"
+                        >
+                          <MdExpandMore className={`transition-transform duration-300 ${isOpenCat ? 'rotate-180' : 'rotate-0'}`} />
+                        </button>
+                      )}
+                    </div>
+
+                    {item.subcategories && isOpenCat && (
+                      <div className="pl-6">
+                        {item.subcategories.map((sc) => (
+                          <NavLink
+                            key={`${item.id}-${sc.id}`}
+                            to={sc.link}
+                            className={`block px-6 py-1.5 text-xs border-l ${activeSub === sc.id ? 'text-red-600 font-semibold border-red-600 bg-red-50' : 'text-gray-700 hover:bg-blue-50 border-gray-200'}`}
+                            onClick={() => setIsOpen(false)}
+                          >
+                            {sc.title}
+                          </NavLink>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 );
               })}
             </div>
