@@ -16,7 +16,7 @@ export const navbarLinks = [
     submenu: [
       {
         id: 3.1,
-        title: "Mangueras hidraulicas",
+        title: "Mangueras hidráulicas",
         link: "/productos#hidraulica",
         subcategories: [
           { id: "sae_r15", title: "MANGUERA SAE 100 R15", link: "/productos#hidraulica&sub=sae_r15" },
@@ -26,24 +26,25 @@ export const navbarLinks = [
           { id: "en856_4sp", title: "MANGUERA EN856-4SP", link: "/productos#hidraulica&sub=en856_4sp" },
           { id: "sae_r2at", title: "MANGUERA SAE 100 R2AT", link: "/productos#hidraulica&sub=sae_r2at" },
           { id: "sae_r1at", title: "MANGUERA SAE 100 R1AT", link: "/productos#hidraulica&sub=sae_r1at" },
-        ]
+        ].reverse()
       },
       {
         id: 3.2,
-        title: "Manguera industriales",
+        title: "Mangueras industriales",
         link: "/productos#industrial",
         subcategories: [
+          { id: "freno_j1401", title: "MANGUERA DE FRENO J1401", link: "/productos#industrial&sub=freno_j1401" },
           { id: "tramo_radiador", title: "TRAMO RADIADOR", link: "/productos#industrial&sub=tramo_radiador" },
           { id: "agua_aire", title: "MANGUERA AGUA/AIRE", link: "/productos#industrial&sub=agua_aire" },
           { id: "succion_descarga", title: "MANGUERA SUCCIÓN Y DESCARGA COMBUSTIBLE", link: "/productos#industrial&sub=succion_descarga" },
           { id: "gasolina_aceite_lona", title: "MANGUERA GASOLINA/ ACEITE (LONA)", link: "/productos#industrial&sub=gasolina_aceite_lona" },
           { id: "gasolina_aceite", title: "MANGUERA GASOLINA/ ACEITE", link: "/productos#industrial&sub=gasolina_aceite" },
           { id: "sae_r6", title: "MANGUERA SAE 100 R6", link: "/productos#industrial&sub=sae_r6" },
-        ]
+        ].reverse()
       },
       {
         id: 3.3,
-        title: "Conexciones Hidraulicas",
+        title: "Conexiones Hidráulicas",
         link: "/productos#accesorios",
         subcategories: [
           { id: "acople_macho_ball", title: "ACOPLE MACHO TIPO BALL", link: "/productos#accesorios&sub=acople_macho_ball" },
@@ -51,6 +52,7 @@ export const navbarLinks = [
           { id: "acople_aguja", title: "ACOPLE HIDRÁULICO TIPO AGUJA", link: "/productos#accesorios&sub=acople_aguja" },
           { id: "flange_r12_90_code61", title: "FLANGE R12 a 90° - CODE 61", link: "/productos#accesorios&sub=flange_r12_90_code61" },
           { id: "flange_r12_recto_code63", title: "FLANGE RECTO R12 - CODE 63", link: "/productos#accesorios&sub=flange_r12_recto_code63" },
+          { id: "flange_r12_90_code63", title: "FLANGE CAT R12 a 90° - CODE 63", link: "/productos#accesorios&sub=flange_r12_90_code63" },
           { id: "flange_r12_recto_code61", title: "FLANGE RECTO R12 - CODE 61", link: "/productos#accesorios&sub=flange_r12_recto_code61" },
           { id: "machos_din_sl", title: "MACHOS MILIMETRICOS DIN\nSERIE LIVIANA", link: "/productos#accesorios&sub=machos_din_sl" },
           { id: "hembras_din_sl", title: "HEMBRAS MILIMETRICAS DIN\nSERIE LIVIANA", link: "/productos#accesorios&sub=hembras_din_sl" },
@@ -71,16 +73,16 @@ export const navbarLinks = [
           { id: "ferrules_r12_4sp_4sh", title: "FERRULES DE ACERO R12 4SP 4SH", link: "/productos#accesorios&sub=ferrules_r12_4sp_4sh" },
           { id: "ferrules_r2", title: "FERRULES DE ACERO R2", link: "/productos#accesorios&sub=ferrules_r2" },
           { id: "ferrules_r1", title: "FERRULES DE ACERO R1", link: "/productos#accesorios&sub=ferrules_r1" },
-        ]
+        ].reverse()
       },
       {
         id: 3.4,
-        title: "Miscelaneos",
+        title: "Misceláneos",
         link: "/productos#miscelaneos",
         subcategories: [
           { id: "abrazaderas_inox", title: "ABRAZADERAS ACERO INOXIDABLE", link: "/productos#miscelaneos&sub=abrazaderas_inox" },
           { id: "maquina_prensado", title: "MÁQUINA DE PRENSADO ELÉCTRICO 1/8”-2”", link: "/productos#miscelaneos&sub=maquina_prensado" },
-        ]
+        ].reverse()
       },
     ]
   },

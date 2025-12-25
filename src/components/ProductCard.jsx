@@ -34,6 +34,31 @@ const ProductCard = ({ product, index }) => {
           {product.nombre}
         </h3>
 
+        {/* Precios (estándar y especial si disponibles) */}
+        {product.precio && (
+          <div className="mb-4 flex flex-wrap gap-2 items-center">
+            <span
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold"
+              style={{ backgroundColor: `${COLORS.primary}10`, color: COLORS.primary }}
+            >
+              <span>Estándar:</span>
+              <span>
+                {product.precio.currency || ''} {typeof product.precio.amount === 'number' ? product.precio.amount.toFixed(2) : product.precio.amount}
+                {product.precio.unit ? ` / ${product.precio.unit}` : ''}
+              </span>
+            </span>
+            {product.precio.specialAmount !== undefined && (
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-green-50 text-green-700 border border-green-200">
+                <span>Especial:</span>
+                <span>
+                  {product.precio.currency || ''} {typeof product.precio.specialAmount === 'number' ? product.precio.specialAmount.toFixed(2) : product.precio.specialAmount}
+                  {product.precio.unit ? ` / ${product.precio.unit}` : ''}
+                </span>
+              </span>
+            )}
+          </div>
+        )}
+
         {/* Descripción breve */}
         <p className="text-sm text-gray-600 mb-4 line-clamp-3">
           {product.descripcion}
@@ -60,23 +85,12 @@ const ProductCard = ({ product, index }) => {
         <div className="pt-4 border-t border-gray-100">
           <button
             onClick={handleViewMore}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-semibold transition-all duration-200"
-            style={{
-              backgroundColor: COLORS.primary,
-              color: 'white',
-              border: `2px solid ${COLORS.primary}`
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = 'white';
-              e.target.style.color = COLORS.primary;
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = COLORS.primary;
-              e.target.style.color = 'white';
-            }}
+            className="group relative w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-semibold overflow-hidden bg-[#d10c2b] text-white transition-transform duration-150 active:scale-[0.99]"
+            style={{ border: `2px solid ${COLORS.primary}` }}
           >
-            <FaFileContract size={14} />
-            <span className="text-sm">Ver más</span>
+            <span className="absolute inset-0 bg-[#ad0a24] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100" aria-hidden />
+            <FaFileContract size={14} className="relative z-10" />
+            <span className="relative z-10 text-sm">Ver más</span>
           </button>
         </div>
       </div>

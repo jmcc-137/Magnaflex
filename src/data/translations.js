@@ -80,9 +80,9 @@ export const translations = {
       showing: 'Mostrando productos de:',
       // Categorías
       cat_todo: 'Todos los productos',
-      cat_hidraulica: 'Mangueras hidraulicas',
-      cat_industrial: 'Manguera industriales',
-      cat_accesorios: 'Conexciones Hidraulicas',
+      cat_hidraulica: 'Mangueras hidráulicas',
+      cat_industrial: 'Mangueras industriales',
+      cat_accesorios: 'Conexiones Hidráulicas',
       cat_neumatica: 'Manguera neumática',
       cat_automovil: 'Manguera de goma para automóvil',
       cat_silicona: 'Manguera de silicona',
@@ -90,7 +90,7 @@ export const translations = {
       cat_vacio: 'Conductos y mangueras de vacío',
       cat_maquina: 'Prensadora de mangueras',
       cat_protector: 'Protector de manguera',
-      cat_miscelaneos: 'Miscelaneos',
+      cat_miscelaneos: 'Misceláneos',
     },
     // Contactos
     contactos: {
@@ -699,7 +699,7 @@ export const PRODUCT_TRANSLATIONS = {
     },
     {
       id: 7,
-      nombre: 'MANGUERA DE FRENO JI401',
+      nombre: 'MANGUERA DE FRENO J1401',
       descripcion: 'Manguera de freno de alta resistencia para sistemas de frenos hidráulicos en automóviles.',
       especificaciones: [
         'Aplicación: Transferencia de fluido de freno en sistemas de frenos hidráulicos',
@@ -1276,6 +1276,20 @@ export const PRODUCT_TRANSLATIONS = {
         'Presión de trabajo: 3000 PSI',
         'Variantes (Código | Referencia | Descripción | Medida):',
         '87912616 | PHC 16-16 | Flange Cat Code 63 | 1 x 1'
+      ]
+    }
+    ,
+    {
+      id: 48,
+      nombre: 'FLANGE CAT R12 90° - CODE 63',
+      descripcion: 'Flange Cat 90° Code 63 para mangueras R12, permite conexión de brida en ángulo para alta presión.',
+      especificaciones: [
+        'Aplicación: Conexión de brida 90° Cat Code 63 para mangueras R12',
+        'Material: Acero',
+        'Tipo: Flange Cat 90° Code 63',
+        'Presión de trabajo: 3000 PSI',
+        'Variantes (Código | Referencia | Descripción | Medida):',
+        'PHC 90 16-16 | Flange Cat 90° Code 63 | 1 x 1'
       ]
     }
     ,
@@ -2030,6 +2044,20 @@ export const PRODUCT_TRANSLATIONS = {
     }
     ,
     {
+      id: 48,
+      nombre: 'CAT FLANGE R12 90° - CODE 63',
+      descripcion: '90° Cat Code 63 flange for R12 hoses, enables angled high-pressure flange connection.',
+      especificaciones: [
+        'Application: 90° Cat Code 63 flange connection for R12 hoses',
+        'Material: Steel',
+        'Type: 90° Cat Code 63 flange',
+        'Working pressure: 3000 PSI',
+        'Variants (Code | Reference | Description | Size):',
+        'PHC 90 16-16 | Cat Code 63 90° Flange | 1 x 1'
+      ]
+    }
+    ,
+    {
       id: 42,
       nombre: 'NEEDLE TYPE COUPLING',
       descripcion: 'Needle-type hydraulic coupling for precise, leak-free handling of pressurized liquids.',
@@ -2777,6 +2805,20 @@ export const PRODUCT_TRANSLATIONS = {
         'Pressão de trabalho: 3000 PSI',
         'Variantes (Código | Referência | Descrição | Medida):',
         '87912616 | PHC 16-16 | Flange Cat Code 63 | 1 x 1'
+      ]
+    }
+    ,
+    {
+      id: 48,
+      nombre: 'FLANGE CAT R12 90° - CODE 63',
+      descripcion: 'Flange Cat 90° Code 63 para mangueiras R12, permite conexão de flange em ângulo para alta pressão.',
+      especificaciones: [
+        'Aplicação: Conexão de flange 90° Cat Code 63 para mangueiras R12',
+        'Material: Aço',
+        'Tipo: Flange Cat 90° Code 63',
+        'Pressão de trabalho: 3000 PSI',
+        'Variantes (Código | Referência | Descrição | Medida):',
+        'PHC 90 16-16 | Flange Cat 90° Code 63 | 1 x 1'
       ]
     }
     ,

@@ -6,6 +6,7 @@ import { CiSearch } from 'react-icons/ci';
 import { useLanguage } from '../hooks';
 import { PRODUCT_TRANSLATIONS } from '../data/translations';
 import { PRODUCTS } from '../data/data_products';
+import { PRICES_BY_ID } from '../data/data_prices';
 import { FaTint, FaBuilding, FaWrench, FaTools, FaCheck } from 'react-icons/fa';
 import ProductCard from '../components/ProductCard';
 import Footer from '../components/Footer';
@@ -48,7 +49,11 @@ const Productos = () => {
     const texts = PRODUCT_TRANSLATIONS[language] || PRODUCT_TRANSLATIONS.es;
     const byId = new Map(texts.map((p) => [p.id, p]));
     // Traducciones aportan nombre/descripcion/especificaciones; base aporta imagen/categoría/subcategoría
-    return PRODUCTS.map((base) => ({ ...(byId.get(base.id) || {}), ...base }));
+    return PRODUCTS.map((base) => ({
+      ...(byId.get(base.id) || {}),
+      ...base,
+      precio: PRICES_BY_ID[base.id] || null,
+    }));
   }, [language]);
 
   // IDs de productos por categoría (estable para ES; para otros idiomas se mantiene por ID)
@@ -59,13 +64,14 @@ const Productos = () => {
     miscelaneos: [
       { id: 'abrazaderas_inox', label: 'ABRAZADERAS ACERO INOXIDABLE' },
       { id: 'maquina_prensado', label: 'MÁQUINA DE PRENSADO ELÉCTRICO 1/8”-2”' },
-    ],
+    ].reverse(),
     accesorios: [
       { id: 'acople_macho_ball', label: 'ACOPLE MACHO TIPO BALL' },
       { id: 'acople_macho_aguja', label: 'ACOPLE MACHO TIPO AGUJA' },
       { id: 'acople_aguja', label: 'ACOPLE HIDRÁULICO TIPO AGUJA' },
       { id: 'flange_r12_90_code61', label: 'FLANGE R12 a 90° - CODE 61' },
       { id: 'flange_r12_recto_code63', label: 'FLANGE RECTO R12 - CODE 63' },
+      { id: 'flange_r12_90_code63', label: 'FLANGE CAT R12 a 90° - CODE 63' },
       { id: 'flange_r12_recto_code61', label: 'FLANGE RECTO R12 - CODE 61' },
       { id: 'machos_din_sl', label: 'MACHOS MILIMETRICOS DIN\nSERIE LIVIANA' },
       { id: 'hembras_din_sl', label: 'HEMBRAS MILIMETRICAS DIN\nSERIE LIVIANA' },
@@ -86,15 +92,16 @@ const Productos = () => {
       { id: 'ferrules_r12_4sp_4sh', label: 'FERRULES DE ACERO R12 4SP 4SH' },
       { id: 'ferrules_r2', label: 'FERRULES DE ACERO R2' },
       { id: 'ferrules_r1', label: 'FERRULES DE ACERO R1' },
-    ],
+    ].reverse(),
     industrial: [
+      { id: 'freno_j1401', label: 'MANGUERA DE FRENO J1401' },
       { id: 'tramo_radiador', label: 'TRAMO RADIADOR' },
       { id: 'agua_aire', label: 'MANGUERA AGUA/AIRE' },
       { id: 'succion_descarga', label: 'MANGUERA SUCCIÓN Y DESCARGA COMBUSTIBLE' },
       { id: 'gasolina_aceite_lona', label: 'MANGUERA GASOLINA/ ACEITE (LONA)' },
       { id: 'gasolina_aceite', label: 'MANGUERA GASOLINA/ ACEITE' },
       { id: 'sae_r6', label: 'MANGUERA SAE 100 R6' },
-    ],
+    ].reverse(),
     hidraulica: [
       { id: 'sae_r15', label: 'MANGUERA SAE 100 R15' },
       { id: 'sae_r14', label: 'MANGUERA SAE 100 R14' },
@@ -103,7 +110,7 @@ const Productos = () => {
       { id: 'en856_4sp', label: 'MANGUERA EN856-4SP' },
       { id: 'sae_r2at', label: 'MANGUERA SAE 100 R2AT' },
       { id: 'sae_r1at', label: 'MANGUERA SAE 100 R1AT' },
-    ],
+    ].reverse(),
   };
 
   // Mapeo de subcategorías a IDs de productos (ES)
@@ -118,6 +125,7 @@ const Productos = () => {
     flange_r12_90_code61: [40],
     flange_r12_recto_code63: [41],
     flange_r12_recto_code61: [39],
+    flange_r12_90_code63: [48],
     machos_din_sl: [38],
     hembras_din_sl: [37],
     espiga_npt_interlock_r13: [36],
@@ -138,6 +146,7 @@ const Productos = () => {
     ferrules_r2: [21],
     ferrules_r1: [20],
     // Industriales
+    freno_j1401: [7],
     tramo_radiador: [19],
     agua_aire: [18],
     succion_descarga: [17],
@@ -325,10 +334,11 @@ const Productos = () => {
                   {activeCategory && (
                     <button
                       onClick={() => setActiveCategory(null)}
-                      className="mt-4 px-6 py-2 text-white rounded-lg hover:opacity-90 transition-opacity"
-                      style={{ backgroundColor: COLORS.primary }}
+                      className="group relative mt-4 px-6 py-2 rounded-lg font-semibold overflow-hidden bg-[#d10c2b] text-white transition-transform duration-150 active:scale-[0.99]"
+                      style={{ border: `2px solid ${COLORS.primary}` }}
                     >
-                      {t('productos.view_all')}
+                      <span className="absolute inset-0 bg-[#ad0a24] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100" aria-hidden />
+                      <span className="relative z-10">{t('productos.view_all')}</span>
                     </button>
                   )}
                 </div>

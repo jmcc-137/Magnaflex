@@ -6,3 +6,4 @@ export { useScrollOpacity } from './useScrollOpacity';
 export { useTouchGestures } from './useTouchGestures';
 export { usePageTitle } from './usePageTitle';
 export { useLanguage } from './useLanguage';
+export { useScrollBounceOnLoad } from './useScrollBounceOnLoad';

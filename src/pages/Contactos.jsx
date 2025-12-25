@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { usePageTitle } from '../hooks';
 import { PAGE_NAMES } from '../components/PageHeaderIcons';
 import { useLanguage } from '../hooks';
-import { FaPhone, FaEnvelope, FaWhatsapp, FaMapMarkerAlt, FaClock, FaTools, FaBox, FaCheckCircle, FaFacebookF, FaInstagram, FaTiktok } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaWhatsapp, FaClock, FaTools, FaBox, FaCheckCircle, FaFacebookF, FaInstagram, FaTiktok } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { COLORS } from '../constants/theme';
 import Footer from '../components/Footer';
@@ -345,56 +345,28 @@ const Contactos = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.7 }}
               type="submit"
-              className="w-full py-4 rounded-lg font-bold text-lg text-white transition-all duration-300 hover:opacity-90"
-              style={{ backgroundColor: COLORS.primary }}
+              className="group relative w-full py-4 rounded-lg font-bold text-lg overflow-hidden bg-[#d10c2b] text-white transition-transform duration-150 active:scale-[0.99]"
+              style={{ border: `2px solid ${COLORS.primary}` }}
             >
-              {formSubmitted ? t('contactos.sent_confirmation') : t('contactos.send_request')}
+              <span className="absolute inset-0 bg-[#ad0a24] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100" aria-hidden />
+              <span className="relative z-10">
+                {formSubmitted ? t('contactos.sent_confirmation') : t('contactos.send_request')}
+              </span>
             </motion.button>
           </form>
         </div>
       </div>
 
-      {/* Mapa y datos legales */}
+      {/* Información (horarios y redes) */}
       <div className="py-16" style={{ backgroundColor: `${COLORS.primary}08` }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">{t('contactos.location_title')}</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Mapa */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              className="rounded-xl overflow-hidden shadow-lg h-96 border-4"
-              style={{ borderColor: COLORS.primary }}
-            >
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.887286353123!2d-73.11765292432618!3d7.124191770526236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e68a4c8c8c8c8c9%3A0x8c8c8c8c8c8c8c8c!2sCarrera%2022%20%2345-67%2C%20Bucaramanga!5e0!3m2!1ses!2sco!4v1234567890"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Ubicación MAGNAFLEX"
-              />
-            </motion.div>
-
-            {/* Datos legales */}
+          <div className="grid grid-cols-1 gap-8">
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               className="space-y-8"
             >
-              <div className="bg-white rounded-xl p-8 shadow-lg border-l-4" style={{ borderLeftColor: COLORS.primary }}>
-                <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{ color: COLORS.primary }}>
-                  <FaMapMarkerAlt />
-                  {t('contactos.main_location')}
-                </h3>
-                <p className="text-gray-700 text-lg font-semibold mb-2">{t('contactos.address')}</p>
-                <p className="text-gray-600">{t('contactos.city_country')}</p>
-              </div>
-
               <div className="bg-white rounded-xl p-8 shadow-lg border-l-4" style={{ borderLeftColor: COLORS.primary }}>
                 <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{ color: COLORS.primary }}>
                   <FaClock />
@@ -404,15 +376,6 @@ const Contactos = () => {
                   <p><span className="font-semibold">{t('contactos.mon_to_sat')}</span> 7:30 AM – 5:00 PM</p>
                   <p><span className="font-semibold">{t('contactos.technical_support_hours')}</span> L–V 8:00 AM – 6:00 PM</p>
                   <p className="text-sm text-gray-500 italic">{t('contactos.special_hours')}</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-xl p-8 shadow-lg border-l-4" style={{ borderLeftColor: COLORS.primary }}>
-                <h3 className="text-xl font-bold mb-4" style={{ color: COLORS.primary }}>{t('contactos.legal_info')}</h3>
-                <div className="space-y-2 text-gray-700">
-                  <p><span className="font-semibold">{t('contactos.nit')}</span> 123.456.789-0</p>
-                  <p><span className="font-semibold">{t('contactos.regime')}</span> {t('contactos.regime_value')}</p>
-                  <p><span className="font-semibold">{t('contactos.certifications')}</span> ISO 9001:2015, SAE, DIN</p>
                 </div>
               </div>
 

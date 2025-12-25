@@ -20,7 +20,7 @@ const Nosotros = () => {
     <div className="w-full min-h-screen flex flex-col bg-white">
       <div className="grow">
       {/* Carrusel de eslóganes - Pantalla completa */}
-      <section className="relative w-full h-screen flex items-center justify-center">
+      <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
         <SloganCarousel />
       </section>
 

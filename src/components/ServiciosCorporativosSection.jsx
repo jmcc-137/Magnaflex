@@ -25,7 +25,7 @@ const ServicioFila = ({ titulo, descripcion, puntos, imagen, icono, invertido })
       )}
     </div>
     <div className="flex-1 flex items-center justify-center w-full md:w-1/2 mt-4 md:mt-0">
-      <img src={imagen} alt={titulo} className="rounded-xl object-cover object-center w-full max-w-[560px] h-56 md:h-64 lg:h-72 shadow-lg" />
+      <img src={imagen} alt={titulo} className="rounded-xl object-contain w-full max-w-[480px] h-auto max-h-[240px] md:max-h-[280px] lg:max-h-[320px] shadow-lg" />
     </div>
   </div>
 );

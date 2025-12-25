@@ -10,6 +10,7 @@ export const PRODUCTS = [
   { id: 40, category: 'accesorios', subcategoryId: 'flange_r12_90_code61', imagen: '/code61.png' },
   { id: 39, category: 'accesorios', subcategoryId: 'flange_r12_recto_code61', imagen: '/code.png' },
   { id: 41, category: 'accesorios', subcategoryId: 'flange_r12_recto_code63', imagen: '/cat.png' },
+  { id: 48, category: 'accesorios', subcategoryId: 'flange_r12_90_code63', imagen: '/cat.png' },
   { id: 38, category: 'accesorios', subcategoryId: 'machos_din_sl', imagen: '/din2.png' },
   { id: 37, category: 'accesorios', subcategoryId: 'hembras_din_sl', imagen: '/din.png' },
   { id: 36, category: 'accesorios', subcategoryId: 'espiga_npt_interlock_r13', imagen: '/inter.png' },
@@ -36,6 +37,8 @@ export const PRODUCTS = [
   { id: 16, category: 'industrial', subcategoryId: 'gasolina_aceite_lona', imagen: '/ag2.png' },
   { id: 15, category: 'industrial', subcategoryId: 'gasolina_aceite', imagen: '/ag.png' },
   { id: 14, category: 'industrial', subcategoryId: 'sae_r6', imagen: '/r6.png' },
+  // Automotriz / Freno
+  { id: 7, category: 'industrial', subcategoryId: 'freno_j1401', imagen: '/j1401.png' },
   // Mangueras hidráulicas
   { id: 13, category: 'hidraulica', subcategoryId: 'sae_r15', imagen: '/r15.png' },
   { id: 12, category: 'hidraulica', subcategoryId: 'sae_r14', imagen: '/r14.png' },

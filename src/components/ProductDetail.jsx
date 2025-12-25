@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { FaDownload, FaPhone, FaCheckCircle, FaArrowLeft } from 'react-icons/fa';
 import { COLORS } from '../constants/theme';
@@ -28,6 +28,19 @@ const ProductDetail = () => {
   }
 
   const images = [product.imagen, product.imagen, product.imagen, product.imagen];
+
+  // Variantes de precio (si existen)
+  const variants = useMemo(() => product?.precio?.variants || [], [product]);
+
+  useEffect(() => {
+    if (variants.length && !selectedVariant) {
+      setSelectedVariant(variants[0]);
+    }
+  }, [variants]);
+
+  const activeAmount = selectedVariant?.amount ?? product?.precio?.amount;
+  const activeSpecial = selectedVariant?.specialAmount ?? product?.precio?.specialAmount;
+  const activeSize = selectedVariant?.size || null;
 
   return (
     <div className="min-h-screen flex flex-col bg-white pt-32">
@@ -86,6 +99,37 @@ const ProductDetail = () => {
               <p className="text-sm text-gray-500">Código: AH-{id}-001</p>
             </div>
 
+            {/* Precios */}
+            {product.precio && (
+              <div className="bg-gray-50 p-6 rounded-lg space-y-3">
+                <h3 className="font-bold text-gray-900 mb-2">Precios</h3>
+                <div className="flex flex-wrap gap-3">
+                  <div
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg border"
+                    style={{ borderColor: COLORS.primary, backgroundColor: `${COLORS.primary}10` }}
+                  >
+                    <span className="text-sm font-semibold" style={{ color: COLORS.primary }}>Estándar</span>
+                    <span className="text-sm text-gray-800">
+                      {product.precio.currency || ''} {typeof activeAmount === 'number' ? activeAmount.toFixed(2) : activeAmount}
+                      {product.precio.unit ? ` / ${product.precio.unit}` : ''}
+                    </span>
+                  </div>
+                  {activeSpecial !== undefined && (
+                    <div className="flex items-center gap-2 px-3 py-2 rounded-lg border border-green-300 bg-green-50">
+                      <span className="text-sm font-semibold text-green-700">Especial</span>
+                      <span className="text-sm text-gray-800">
+                        {product.precio.currency || ''} {typeof activeSpecial === 'number' ? activeSpecial.toFixed(2) : activeSpecial}
+                        {product.precio.unit ? ` / ${product.precio.unit}` : ''}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                {activeSize && (
+                  <p className="text-xs text-gray-600">Medida seleccionada: <span className="font-semibold text-gray-800">{activeSize}</span></p>
+                )}
+              </div>
+            )}
+
             {/* Especificaciones clave */}
             <div className="bg-gray-50 p-6 rounded-lg space-y-3">
               <h3 className="font-bold text-gray-900 mb-4">Especificaciones principales</h3>
@@ -100,20 +144,11 @@ const ProductDetail = () => {
             {/* Botones de acción */}
             <div className="space-y-3">
               <button
-                className="w-full py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-2"
-                style={{
-                  backgroundColor: COLORS.primary,
-                  color: 'white',
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.opacity = '0.9';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.opacity = '1';
-                }}
+                className="group relative w-full py-3 rounded-lg font-semibold flex items-center justify-center gap-2 overflow-hidden bg-[#d10c2b] text-white transition-transform duration-150 active:scale-[0.99]"
               >
-                <FaPhone size={16} />
-                Cotizar
+                <span className="absolute inset-0 bg-[#ad0a24] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100" aria-hidden />
+                <FaPhone size={16} className="relative z-10" />
+                <span className="relative z-10">Cotizar</span>
               </button>
 
               <button className="w-full py-3 rounded-lg font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors flex items-center justify-center gap-2">
@@ -131,30 +166,35 @@ const ProductDetail = () => {
         </div>
       </div>
 
-      {/* Sección de variaciones */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 border-t pt-12">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Variaciones disponibles</h2>
-        <div className="space-y-4">
-          <div>
-            <h3 className="font-semibold text-gray-700 mb-3">Diámetro</h3>
-            <div className="flex flex-wrap gap-3">
-              {['1/4"', '3/8"', '1/2"', '3/4"', '1"'].map((size) => (
-                <button
-                  key={size}
-                  onClick={() => setSelectedVariant(size)}
-                  className={`px-4 py-2 rounded-lg font-semibold transition-all border-2 ${
-                    selectedVariant === size
-                      ? 'border-red-600 bg-red-50 text-red-600'
-                      : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400'
-                  }`}
-                >
-                  {size}
-                </button>
-              ))}
+      {/* Sección de variaciones (dinámica) */}
+      {variants.length > 0 && (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 border-t pt-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Variaciones disponibles</h2>
+          <div className="space-y-4">
+            <div>
+              <h3 className="font-semibold text-gray-700 mb-3">Medida</h3>
+              <div className="flex flex-wrap gap-3">
+                {variants.map((v) => {
+                  const active = selectedVariant?.size === v.size;
+                  return (
+                    <button
+                      key={v.size}
+                      onClick={() => setSelectedVariant(v)}
+                      className={`px-4 py-2 rounded-lg font-semibold transition-all border-2 ${
+                        active
+                          ? 'border-red-600 bg-red-50 text-red-600'
+                          : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400'
+                      }`}
+                    >
+                      {v.size}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Tabla de características técnicas */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
@@ -178,6 +218,35 @@ const ProductDetail = () => {
           </table>
         </div>
       </div>
+
+      {/* Tabla de variantes de precio (si existen) */}
+      {variants.length > 0 && (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Tabla de precios por medida</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-gray-100 border-b-2 border-gray-300">
+                  <th className="px-6 py-3 text-left font-bold text-gray-900">Medida</th>
+                  <th className="px-6 py-3 text-left font-bold text-gray-900">Presión (PSI)</th>
+                  <th className="px-6 py-3 text-left font-bold text-gray-900">Precio Estándar</th>
+                  <th className="px-6 py-3 text-left font-bold text-gray-900">Precio Especial</th>
+                </tr>
+              </thead>
+              <tbody>
+                {variants.map((v) => (
+                  <tr key={v.size} className="border-b border-gray-200 hover:bg-gray-50">
+                    <td className="px-6 py-4 text-gray-700 font-semibold">{v.size}</td>
+                    <td className="px-6 py-4 text-gray-600">{v.pressurePsi ?? '-'}</td>
+                    <td className="px-6 py-4 text-gray-600">{product.precio.currency || ''} {v.amount.toFixed(2)} {product.precio.unit ? ` / ${product.precio.unit}` : ''}</td>
+                    <td className="px-6 py-4 text-gray-600">{product.precio.currency || ''} {v.specialAmount !== undefined ? v.specialAmount.toFixed(2) : '-'} {product.precio.unit ? ` / ${product.precio.unit}` : ''}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
 
       {/* Descripción del producto */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 border-t pt-12">
